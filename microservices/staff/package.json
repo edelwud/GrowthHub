@@ -2,7 +2,7 @@
   "name": "staff",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edelwud/GrowthHub"
+    "url": "https://github.com/edelwud/GrowthHub.git"
   },
   "scripts": {
     "build": "npx projen build",
