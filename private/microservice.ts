@@ -19,6 +19,7 @@ export class MicroserviceProject extends TypeScriptAppProject {
         ...options.tsconfig,
         compilerOptions: {
           ...options.tsconfig?.compilerOptions,
+          strictPropertyInitialization: false,
         },
       },
     });
