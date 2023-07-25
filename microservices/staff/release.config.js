@@ -14,12 +14,13 @@ module.exports = {
     [
       '@semantic-release/changelog',
       {
-        changelogFile: `${appPath}/CHANGELOG.md`,
+        changelogFile: `CHANGELOG.md`,
       },
     ],
     [
       '@semantic-release/git',
       {
+        assets: ['CHANGELOG.md'],
         message:
           `chore(release): ${artifactName}` +
           '-v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
@@ -28,7 +29,7 @@ module.exports = {
     [
       '@semantic-release-plus/docker',
       {
-        name: `edelwud/${appName}`+':${nextRelease.version}',
+        name: `edelwud/${appName}`,
         registry: 'ghcr.io',
         skipLogin: 'true'
       },
