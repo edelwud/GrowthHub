@@ -12,7 +12,7 @@
     "docker": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "docker build -t ghcr.io/edelwud/gateway .",
+        "command": "docker build -t edelwud/gateway .",
         "cwd": "microservices/gateway"
       }
     },

@@ -192,7 +192,7 @@ export class MonorepoProject extends NxMonorepoProject {
         NxProject.ensure(subproject).setTarget("docker", {
           executor: "nx:run-commands",
           options: {
-            command: `docker build -t ghcr.io/edelwud/${subproject.name} .`,
+            command: `docker build -t edelwud/${subproject.name} .`,
             cwd: relative(this.outdir, subproject.outdir),
           },
         });
