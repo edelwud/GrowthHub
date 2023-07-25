@@ -148,7 +148,7 @@ export class MonorepoProject extends NxMonorepoProject {
         "          nxCloud: 'true'",
         "        env:",
         "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-        "          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}",
+        "          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_PAT }}",
       ],
     });
   }
