@@ -150,7 +150,7 @@ export class MonorepoProject extends NxMonorepoProject {
         "        with:",
         "          targets: docker",
         "          nxCloud: 'true'",
-        "          parallel: 1",
+        "          parallel: 3",
         "        env:",
         "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
         "          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_PAT }}",
