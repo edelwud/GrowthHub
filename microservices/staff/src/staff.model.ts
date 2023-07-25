@@ -8,4 +8,7 @@ export class Staff {
 
   @Field()
     name: string;
+
+  @Field()
+    email: string;
 }
