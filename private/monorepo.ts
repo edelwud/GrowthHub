@@ -169,7 +169,7 @@ export class MonorepoProject extends NxMonorepoProject {
         NxProject.ensure(subproject).setTarget("release", {
           executor: "nx:run-commands",
           options: {
-            command: "pnpm exec semantic-release-plus --debug",
+            command: "pnpm exec semantic-release-plus",
             cwd: relative(this.outdir, subproject.outdir),
           },
         });
@@ -181,10 +181,10 @@ export class MonorepoProject extends NxMonorepoProject {
             "const artifactName = appName;",
             "module.exports = {",
             "  name: appName,",
-            "  pkgRoot: `dist/${appPath}`, // should come from angular.cli",
+            "  pkgRoot: 'lib/',",
             "  tagFormat: artifactName + '-v${version}',",
-            "  commitPaths: ['force-release.md', `${appPath}/*`], // should come from dep-graph and angular.json",
-            "  assets: [`${appPath}/README.md`, `${appPath}/CHANGELOG.md`],",
+            "  commitPaths: ['*'],",
+            "  assets: ['README.md', 'CHANGELOG.md'],",
             "  branches: ['main'],",
             "  plugins: [",
             "    '@semantic-release/commit-analyzer',",

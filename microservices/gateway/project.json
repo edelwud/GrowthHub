@@ -5,7 +5,7 @@
     "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm exec semantic-release-plus --debug",
+        "command": "pnpm exec semantic-release-plus",
         "cwd": "microservices/gateway"
       }
     },
