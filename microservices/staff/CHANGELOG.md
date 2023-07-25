@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/edelwud/GrowthHub/compare/staff-v1.1.2...staff-v1.1.3) (2023-07-25)
+
+
+### Bug Fixes
+
+* change tag for docker image ([5a97957](https://github.com/edelwud/GrowthHub/commit/5a9795769368352a8b131699e629fd9e89792a11))
+
 ## [1.1.2](https://github.com/edelwud/GrowthHub/compare/staff-v1.1.1...staff-v1.1.2) (2023-07-25)
 
 
