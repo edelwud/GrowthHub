@@ -248,6 +248,15 @@
           "receiveArgs": true
         }
       ]
+    },
+    "watch-and-run": {
+      "name": "watch-and-run",
+      "steps": [
+        {
+          "exec": "pnpm exec nx run-many --target=watch-and-run --output-style=stream --nx-bail",
+          "receiveArgs": true
+        }
+      ]
     }
   },
   "env": {

@@ -45,6 +45,10 @@
       "type": "build"
     },
     {
+      "name": "nodemon",
+      "type": "build"
+    },
+    {
       "name": "npm-check-updates",
       "type": "build"
     },

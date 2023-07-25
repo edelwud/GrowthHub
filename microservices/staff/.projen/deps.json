@@ -112,6 +112,10 @@
       "type": "runtime"
     },
     {
+      "name": "@nestjs/platform-express",
+      "type": "runtime"
+    },
+    {
       "name": "graphql",
       "type": "runtime"
     },

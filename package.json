@@ -23,6 +23,7 @@
     "upgrade": "pnpm exec projen upgrade",
     "upgrade-deps": "pnpm exec projen upgrade-deps",
     "watch": "pnpm exec projen watch",
+    "watch-and-run": "pnpm exec projen watch-and-run",
     "synth-workspace": "pnpm exec projen"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^5.0.0",
+    "nodemon": "^3.0.1",
     "npm-check-updates": "^16.10.16",
     "nx": "16.0.0",
     "nx-cloud": "^16.1.1",

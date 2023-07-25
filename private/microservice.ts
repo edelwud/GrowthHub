@@ -29,6 +29,7 @@ export class MicroserviceProject extends TypeScriptAppProject {
       "@nestjs/graphql",
       "@nestjs/apollo",
       "@apollo/server",
+      "@nestjs/platform-express",
       "graphql",
     );
     if (options.isGateway) this.addDeps("@apollo/gateway");

@@ -16,6 +16,13 @@
         "cwd": "microservices/gateway"
       }
     },
+    "watch-and-run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nodemon src/main.ts",
+        "cwd": "microservices/gateway"
+      }
+    },
     "default": {
       "executor": "nx:run-commands",
       "options": {

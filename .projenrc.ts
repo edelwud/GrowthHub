@@ -5,7 +5,7 @@ import { MonorepoProject } from "./private/monorepo";
 const monorepo = new MonorepoProject({
   name: "growth-hub",
   defaultReleaseBranch: "main",
-  devDeps: ["@aws-prototyping-sdk/nx-monorepo"],
+  devDeps: ["@aws-prototyping-sdk/nx-monorepo", "ts-node", "nodemon"],
   projenrcTs: true,
   packageManager: NodePackageManager.PNPM,
   repository: "https://github.com/edelwud/GrowthHub",

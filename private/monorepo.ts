@@ -23,6 +23,10 @@ export class MonorepoProject extends NxMonorepoProject {
       target: "docker",
     });
 
+    this.nxConfigurator.addNxRunManyTask("watch-and-run", {
+      target: "watch-and-run",
+    });
+
     this.nx.useNxCloud(
       "N2E2YzBkY2YtZmI5NS00ZTgxLWJjZDUtYjA3MDJmYWRmNTIyfHJlYWQtd3JpdGU",
     );
@@ -199,6 +203,14 @@ export class MonorepoProject extends NxMonorepoProject {
           executor: "nx:run-commands",
           options: {
             command: `docker build -t edelwud/${subproject.name} .`,
+            cwd: relative(this.outdir, subproject.outdir),
+          },
+        });
+
+        NxProject.ensure(subproject).setTarget("watch-and-run", {
+          executor: "nx:run-commands",
+          options: {
+            command: `nodemon src/main.ts`,
             cwd: relative(this.outdir, subproject.outdir),
           },
         });
