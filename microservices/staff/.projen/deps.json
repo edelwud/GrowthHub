@@ -71,6 +71,10 @@
       "type": "build"
     },
     {
+      "name": "semantic-release-plus",
+      "type": "build"
+    },
+    {
       "name": "ts-jest",
       "type": "build"
     },

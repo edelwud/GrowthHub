@@ -158,6 +158,7 @@ export class MonorepoProject extends NxMonorepoProject {
     this.subprojects.forEach((subproject) => {
       if (isNodeProject(subproject) && subproject instanceof NodeProject) {
         subproject.addDevDeps("semantic-release");
+        subproject.addDevDeps("semantic-release-plus");
         subproject.addDevDeps("@semantic-release/changelog");
         subproject.addDevDeps("@semantic-release/git");
         subproject.addDevDeps("@semantic-release/release-notes-generator");
