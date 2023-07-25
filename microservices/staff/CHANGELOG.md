@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/edelwud/GrowthHub/compare/staff-v1.1.3...staff-v1.1.4) (2023-07-25)
+
+
+### Bug Fixes
+
+* **staff:** add email to staff model ([3b8c3c9](https://github.com/edelwud/GrowthHub/commit/3b8c3c9cf152d324ae173c4442c9467d24a4525c))
+
 ## [1.1.3](https://github.com/edelwud/GrowthHub/compare/staff-v1.1.2...staff-v1.1.3) (2023-07-25)
 
 
