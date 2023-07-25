@@ -169,7 +169,7 @@ export class MonorepoProject extends NxMonorepoProject {
         NxProject.ensure(subproject).setTarget("release", {
           executor: "nx:run-commands",
           options: {
-            command: "pnpm exec semantic-release-plus",
+            command: "pnpm exec semantic-release-plus --debug",
             cwd: relative(this.outdir, subproject.outdir),
           },
         });
