@@ -97,11 +97,14 @@ importers:
         version: 10.1.0(@nestjs/common@10.1.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/graphql':
         specifier: ^12.0.8
-        version: 12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)
+        version: 12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)(ts-morph@19.0.0)
       graphql:
         specifier: ^16.7.1
         version: 16.7.1
     devDependencies:
+      '@semantic-release-plus/docker':
+        specifier: '*'
+        version: 3.1.2(semantic-release-plus@20.0.0)
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@21.0.7)
@@ -176,11 +179,17 @@ importers:
         version: 10.1.0(@nestjs/common@10.1.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/graphql':
         specifier: ^12.0.8
-        version: 12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)
+        version: 12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)(ts-morph@19.0.0)
       graphql:
         specifier: ^16.7.1
         version: 16.7.1
+      ts-morph:
+        specifier: '*'
+        version: 19.0.0
     devDependencies:
+      '@semantic-release-plus/docker':
+        specifier: '*'
+        version: 3.1.2(semantic-release-plus@20.0.0)
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@21.0.7)
@@ -1408,7 +1417,7 @@ packages:
       '@apollo/server-plugin-landing-page-graphql-playground': 4.0.0(@apollo/server@4.8.1)
       '@nestjs/common': 10.1.0(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/core': 10.1.0(@nestjs/common@10.1.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
-      '@nestjs/graphql': 12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)
+      '@nestjs/graphql': 12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)(ts-morph@19.0.0)
       graphql: 16.7.1
       iterall: 1.3.0
       lodash.omit: 4.5.0
@@ -1466,7 +1475,7 @@ packages:
       - encoding
     dev: false
 
-  /@nestjs/graphql@12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13):
+  /@nestjs/graphql@12.0.8(@nestjs/common@10.1.0)(@nestjs/core@10.1.0)(graphql@16.7.1)(reflect-metadata@0.1.13)(ts-morph@19.0.0):
     resolution: {integrity: sha512-odYDHUdLOMCxjC5VSEmF/23r8cY40N1KCwBkWaCmI1IF76Ffe3srWRDv8HS9tcai9eSmOeSWuyLBEg2OSru0cQ==}
     peerDependencies:
       '@apollo/subgraph': ^2.0.0
@@ -1502,6 +1511,7 @@ packages:
       normalize-path: 3.0.0
       reflect-metadata: 0.1.13
       subscriptions-transport-ws: 0.11.0(graphql@16.7.1)
+      ts-morph: 19.0.0
       tslib: 2.6.0
       uuid: 9.0.0
       ws: 8.13.0
@@ -2219,6 +2229,27 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
+  /@semantic-release-plus/core@1.0.1(semantic-release-plus@20.0.0):
+    resolution: {integrity: sha512-WPFwm2qwfYIFOR+3y+fEGx14tzyYU76S4X4GZ7TlzUk1gXA+796VOfEH5kjAJ9Z8z/Zda5eJAdLI6yjTSWkC0g==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      semantic-release-plus: ^19.0.0
+    dependencies:
+      semantic-release-plus: 20.0.0(semantic-release@21.0.7)
+    dev: true
+
+  /@semantic-release-plus/docker@3.1.2(semantic-release-plus@20.0.0):
+    resolution: {integrity: sha512-FUgkaeLIv+Rl8nqnXTAhfEhNoczVKwVVA22oLmvb0az8EbfIf1fZPiUE7Ssj1AgHkbeV4p8GL8hBFj0yrbZlLA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      semantic-release-plus: ^19.0.0 || ^20.0.0 || >=20.0.0-alpha
+    dependencies:
+      '@semantic-release-plus/core': 1.0.1(semantic-release-plus@20.0.0)
+      execa: 5.1.1
+      semantic-release-plus: 20.0.0(semantic-release@21.0.7)
+      semver: 7.3.5
+    dev: true
+
   /@semantic-release/changelog@6.0.3(semantic-release@21.0.7):
     resolution: {integrity: sha512-dZuR5qByyfe3Y03TpmCvAxCyTnp7r5XwtHRf/8vD9EAn4ZWbavUX8adMtXYzE86EVh0gyLA7lm5yW4IV30XUag==}
     engines: {node: '>=14.17'}
@@ -2491,6 +2522,15 @@ packages:
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+
+  /@ts-morph/common@0.20.0:
+    resolution: {integrity: sha512-7uKjByfbPpwuzkstL3L5MQyuXPSKdoNG93Fmi2JoDcTf3pEP731JdRFAduRVkOs8oqxPsXKA+ScrWkdQ8t/I+Q==}
+    dependencies:
+      fast-glob: 3.3.1
+      minimatch: 7.4.6
+      mkdirp: 2.1.6
+      path-browserify: 1.0.1
+    dev: false
 
   /@tsconfig/node10@1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
@@ -3676,6 +3716,10 @@ packages:
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
     dev: true
 
+  /code-block-writer@12.0.0:
+    resolution: {integrity: sha512-q4dMFMlXtKR3XNBHyMHt/3pwYNA69EDk00lloMOaaUMKPUXBw6lpXtbu3MMVG6/uOihGnRDOlkyqsONEUj60+w==}
+    dev: false
+
   /collect-v8-coverage@1.0.2:
     resolution: {integrity: sha512-lHl4d5/ONEbLlJvaJNtsF/Lz+WvB07u2ycqTYbdrq7UypDXailES4valYb2eWiJFxZlVmpGekfqoxQhzyFdT4Q==}
     dev: true
@@ -4796,7 +4840,6 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.5
-    dev: true
 
   /fast-json-patch@3.1.1:
     resolution: {integrity: sha512-vf6IHUX2SBcA+5/+4883dsIjpBTqmfBjmYiWK1savxQmFk4JfBMLa7ynTYOs1Rolp/T1betJxHiGD3g1Mn8lUQ==}
@@ -6925,6 +6968,13 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /minimatch@7.4.6:
+    resolution: {integrity: sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==}
+    engines: {node: '>=10'}
+    dependencies:
+      brace-expansion: 2.0.1
+    dev: false
+
   /minimatch@9.0.2:
     resolution: {integrity: sha512-PZOT9g5v2ojiTL7r1xF6plNHLtOeTpSlDI007As2NlA2aYBMfVom17yqa6QzhmDP8QOhn7LjHTg7DFCVSSa6yg==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -7017,6 +7067,12 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+
+  /mkdirp@2.1.6:
+    resolution: {integrity: sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dev: false
 
   /modify-values@1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
@@ -7870,6 +7926,10 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
+  /path-browserify@1.0.1:
+    resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
+    dev: false
+
   /path-exists@3.0.0:
     resolution: {integrity: sha512-bpC7GYwiDYQ4wYLe+FA8lhRjhQCMcQGuSgGGqDkg/QerRWw9CmGRT0iSOVRSZJ29NMLZgIzqaljJ63oaL4NIJQ==}
     engines: {node: '>=4'}
@@ -8602,6 +8662,14 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
+  /semver@7.3.5:
+    resolution: {integrity: sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      lru-cache: 6.0.0
+    dev: true
+
   /semver@7.5.3:
     resolution: {integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==}
     engines: {node: '>=10'}
@@ -9304,6 +9372,13 @@ packages:
       typescript: 5.1.6
       yargs-parser: 21.1.1
     dev: true
+
+  /ts-morph@19.0.0:
+    resolution: {integrity: sha512-D6qcpiJdn46tUqV45vr5UGM2dnIEuTGNxVhg0sk5NX11orcouwj6i1bMqZIz2mZTZB1Hcgy7C3oEVhAT+f6mbQ==}
+    dependencies:
+      '@ts-morph/common': 0.20.0
+      code-block-writer: 12.0.0
+    dev: false
 
   /ts-node@10.9.1(@types/node@16.18.39)(typescript@5.1.6):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}

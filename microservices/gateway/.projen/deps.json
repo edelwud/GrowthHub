@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@semantic-release-plus/docker",
+      "type": "build"
+    },
+    {
       "name": "@semantic-release/changelog",
       "type": "build"
     },

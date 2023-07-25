@@ -161,6 +161,7 @@ export class MonorepoProject extends NxMonorepoProject {
         subproject.addDevDeps("semantic-release-plus");
         subproject.addDevDeps("@semantic-release/changelog");
         subproject.addDevDeps("@semantic-release/git");
+        subproject.addDevDeps("@semantic-release-plus/docker");
         subproject.addDevDeps("@semantic-release/release-notes-generator");
         if (subproject.tryFindFile(".helm")) {
           subproject.addDevDeps("semantic-release-helm");
