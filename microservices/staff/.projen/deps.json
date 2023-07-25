@@ -27,6 +27,7 @@
     },
     {
       "name": "@types/ws",
+      "version": "8.5.4",
       "type": "build"
     },
     {

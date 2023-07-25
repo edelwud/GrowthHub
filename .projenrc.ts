@@ -18,7 +18,7 @@ new MicroserviceProject({
   packageManager: NodePackageManager.PNPM,
   microservicePort: 3001,
   repository: "https://github.com/edelwud/GrowthHub",
-  devDeps: ["@types/ws"],
+  devDeps: ["@types/ws@8.5.4"],
   deps: ["ts-morph"],
 });
 
