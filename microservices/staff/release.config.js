@@ -18,20 +18,19 @@ module.exports = {
       },
     ],
     [
+      '@semantic-release-plus/docker',
+      {
+        name: `ghcr.io/edelwud/${appName}`,
+        skipLogin: 'true'
+      },
+    ],
+    [
       '@semantic-release/git',
       {
         assets: ['CHANGELOG.md'],
         message:
           `chore(release): ${artifactName}` +
           '-v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-      },
-    ],
-    [
-      '@semantic-release-plus/docker',
-      {
-        name: `edelwud/${appName}`,
-        registry: 'ghcr.io',
-        skipLogin: 'true'
       },
     ],
   ],
