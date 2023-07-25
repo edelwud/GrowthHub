@@ -13,6 +13,17 @@ const monorepo = new MonorepoProject({
 
 new MicroserviceProject({
   parent: monorepo,
+  name: "skills",
+  defaultReleaseBranch: "main",
+  packageManager: NodePackageManager.PNPM,
+  microservicePort: 3002,
+  repository: "https://github.com/edelwud/GrowthHub",
+  devDeps: ["@types/ws@8.5.4"],
+  deps: ["ts-morph"],
+});
+
+new MicroserviceProject({
+  parent: monorepo,
   name: "staff",
   defaultReleaseBranch: "main",
   packageManager: NodePackageManager.PNPM,

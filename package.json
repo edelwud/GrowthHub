@@ -74,6 +74,7 @@
   "workspaces": {
     "packages": [
       "microservices/gateway",
+      "microservices/skills",
       "microservices/staff"
     ]
   },

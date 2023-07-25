@@ -88,10 +88,16 @@
     },
     {
       "name": "@apollo/gateway",
+      "version": "2.2.3",
       "type": "runtime"
     },
     {
       "name": "@apollo/server",
+      "type": "runtime"
+    },
+    {
+      "name": "@apollo/subgraph",
+      "version": "2.2.3",
       "type": "runtime"
     },
     {

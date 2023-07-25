@@ -20,6 +20,7 @@ export class MicroserviceProject extends TypeScriptAppProject {
         compilerOptions: {
           ...options.tsconfig?.compilerOptions,
           strictPropertyInitialization: false,
+          emitDecoratorMetadata: true,
         },
       },
     });
@@ -30,9 +31,10 @@ export class MicroserviceProject extends TypeScriptAppProject {
       "@nestjs/apollo",
       "@apollo/server",
       "@nestjs/platform-express",
+      "@apollo/gateway@2.2.3",
+      "@apollo/subgraph@2.2.3",
       "graphql",
     );
-    if (options.isGateway) this.addDeps("@apollo/gateway");
 
     new TextFile(this, ".dockerignore", {
       lines: [
