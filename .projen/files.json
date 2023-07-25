@@ -2,6 +2,7 @@
   "files": [
     ".eslintrc.json",
     ".gitattributes",
+    ".github/workflows/release.yml",
     ".gitignore",
     ".npmignore",
     ".npmrc",
@@ -14,6 +15,8 @@
     ".syncpackrc.json",
     "LICENSE",
     "nx.json",
+    "pnpm-workspace.yaml",
+    "release.config.js",
     "tsconfig.dev.json",
     "tsconfig.json"
   ],

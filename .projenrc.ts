@@ -1,12 +1,33 @@
-import { NxMonorepoProject } from "@aws-prototyping-sdk/nx-monorepo";
-const project = new NxMonorepoProject({
+import { NodePackageManager } from "projen/lib/javascript";
+import { MicroserviceProject } from "./private/microservice";
+import { MonorepoProject } from "./private/monorepo";
+
+const monorepo = new MonorepoProject({
+  name: "growth-hub",
   defaultReleaseBranch: "main",
   devDeps: ["@aws-prototyping-sdk/nx-monorepo"],
-  name: "GrowthHub",
   projenrcTs: true,
-
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  packageManager: NodePackageManager.PNPM,
+  repository: "https://github.com/edelwud/GrowthHub",
 });
-project.synth();
+
+new MicroserviceProject({
+  parent: monorepo,
+  name: "staff",
+  defaultReleaseBranch: "main",
+  packageManager: NodePackageManager.PNPM,
+  microservicePort: 3001,
+  repository: "https://github.com/edelwud/GrowthHub",
+});
+
+new MicroserviceProject({
+  parent: monorepo,
+  name: "gateway",
+  defaultReleaseBranch: "main",
+  packageManager: NodePackageManager.PNPM,
+  isGateway: true,
+  microservicePort: 3000,
+  repository: "https://github.com/edelwud/GrowthHub",
+});
+
+monorepo.synth();
