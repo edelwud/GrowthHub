@@ -2,13 +2,14 @@
   "name": "growth-hub",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edelwud/GrowthHub.git"
+    "url": "https://github.com/edelwud/GrowthHub"
   },
   "scripts": {
     "build": "pnpm exec projen build",
     "clobber": "pnpm exec projen clobber",
     "compile": "pnpm exec projen compile",
     "default": "pnpm exec projen default",
+    "docker": "pnpm exec projen docker",
     "eject": "pnpm exec projen eject",
     "eslint": "pnpm exec projen eslint",
     "graph": "pnpm exec projen graph",

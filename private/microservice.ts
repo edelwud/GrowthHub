@@ -48,6 +48,7 @@ export class MicroserviceProject extends TypeScriptAppProject {
     new TextFile(this, "Dockerfile", {
       lines: [
         "FROM node:18-alpine",
+        "LABEL org.opencontainers.image.source=" + options.repository,
         "WORKDIR /microservice/" + options.name,
         "RUN npm i -g pnpm",
         "COPY package*.json .",

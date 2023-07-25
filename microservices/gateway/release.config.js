@@ -25,5 +25,13 @@ module.exports = {
           '-v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
+    [
+      '@semantic-release-plus/docker',
+      {
+        name: `edelwud/${appName}`+':${nextRelease.version}',
+        registry: 'ghcr.io',
+        skipLogin: 'true'
+      },
+    ],
   ],
 };

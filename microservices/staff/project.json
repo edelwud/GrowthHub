@@ -9,6 +9,13 @@
         "cwd": "microservices/staff"
       }
     },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t ghcr.io/edelwud/staff .",
+        "cwd": "microservices/staff"
+      }
+    },
     "default": {
       "executor": "nx:run-commands",
       "options": {

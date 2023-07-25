@@ -8,7 +8,7 @@ const monorepo = new MonorepoProject({
   devDeps: ["@aws-prototyping-sdk/nx-monorepo"],
   projenrcTs: true,
   packageManager: NodePackageManager.PNPM,
-  repository: "https://github.com/edelwud/GrowthHub.git",
+  repository: "https://github.com/edelwud/GrowthHub",
 });
 
 new MicroserviceProject({
@@ -17,7 +17,7 @@ new MicroserviceProject({
   defaultReleaseBranch: "main",
   packageManager: NodePackageManager.PNPM,
   microservicePort: 3001,
-  repository: "https://github.com/edelwud/GrowthHub.git",
+  repository: "https://github.com/edelwud/GrowthHub",
   devDeps: ["@types/ws"],
   deps: ["ts-morph"],
 });
@@ -29,7 +29,7 @@ new MicroserviceProject({
   packageManager: NodePackageManager.PNPM,
   isGateway: true,
   microservicePort: 3000,
-  repository: "https://github.com/edelwud/GrowthHub.git",
+  repository: "https://github.com/edelwud/GrowthHub",
 });
 
 monorepo.synth();

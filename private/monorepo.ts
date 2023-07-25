@@ -19,6 +19,10 @@ export class MonorepoProject extends NxMonorepoProject {
       target: "release",
     });
 
+    this.nxConfigurator.addNxRunManyTask("docker", {
+      target: "docker",
+    });
+
     this.nx.useNxCloud(
       "N2E2YzBkY2YtZmI5NS00ZTgxLWJjZDUtYjA3MDJmYWRmNTIyfHJlYWQtd3JpdGU",
     );
@@ -141,6 +145,15 @@ export class MonorepoProject extends NxMonorepoProject {
         "        with:",
         "          name: packages",
         "          path: dist/packages",
+        "      - name: Docker build affected",
+        "        uses: mansagroup/nrwl-nx-action@v3.2.1",
+        "        with:",
+        "          targets: docker",
+        "          nxCloud: 'true'",
+        "          parallel: 1",
+        "        env:",
+        "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
+        "          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_PAT }}",
         "      - name: Release affected",
         "        uses: mansagroup/nrwl-nx-action@v3.2.1",
         "        with:",
@@ -176,6 +189,14 @@ export class MonorepoProject extends NxMonorepoProject {
           },
         });
 
+        NxProject.ensure(subproject).setTarget("docker", {
+          executor: "nx:run-commands",
+          options: {
+            command: `docker build -t ghcr.io/edelwud/${subproject.name} .`,
+            cwd: relative(this.outdir, subproject.outdir),
+          },
+        });
+
         new TextFile(subproject, "release.config.js", {
           lines: [
             `const appName = '${subproject.name}';`,
@@ -203,6 +224,14 @@ export class MonorepoProject extends NxMonorepoProject {
             "        message:",
             "          `chore(release): ${artifactName}` +",
             "          '-v${nextRelease.version} [skip ci]\\n\\n${nextRelease.notes}',",
+            "      },",
+            "    ],",
+            "    [",
+            "      '@semantic-release-plus/docker',",
+            "      {",
+            "        name: `edelwud/${appName}`+':${nextRelease.version}',",
+            "        registry: 'ghcr.io',",
+            "        skipLogin: 'true'",
             "      },",
             "    ],",
             "  ],",

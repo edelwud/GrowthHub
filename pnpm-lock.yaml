@@ -103,7 +103,7 @@ importers:
         version: 16.7.1
     devDependencies:
       '@semantic-release-plus/docker':
-        specifier: '*'
+        specifier: ^3.1.2
         version: 3.1.2(semantic-release-plus@20.0.0)
       '@semantic-release/changelog':
         specifier: ^6.0.3
@@ -184,11 +184,11 @@ importers:
         specifier: ^16.7.1
         version: 16.7.1
       ts-morph:
-        specifier: '*'
+        specifier: ^19.0.0
         version: 19.0.0
     devDependencies:
       '@semantic-release-plus/docker':
-        specifier: '*'
+        specifier: ^3.1.2
         version: 3.1.2(semantic-release-plus@20.0.0)
       '@semantic-release/changelog':
         specifier: ^6.0.3
@@ -206,7 +206,7 @@ importers:
         specifier: ^16
         version: 16.18.39
       '@types/ws':
-        specifier: '*'
+        specifier: ^8.5.5
         version: 8.5.5
       '@typescript-eslint/eslint-plugin':
         specifier: ^5

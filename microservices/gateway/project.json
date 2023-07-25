@@ -9,6 +9,13 @@
         "cwd": "microservices/gateway"
       }
     },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t ghcr.io/edelwud/gateway .",
+        "cwd": "microservices/gateway"
+      }
+    },
     "default": {
       "executor": "nx:run-commands",
       "options": {
