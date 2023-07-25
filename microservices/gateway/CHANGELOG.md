@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/edelwud/GrowthHub/compare/gateway-v1.1.1...gateway-v1.1.2) (2023-07-25)
+
+
+### Bug Fixes
+
+* change naming for docker image ([17c8a4d](https://github.com/edelwud/GrowthHub/commit/17c8a4ddff599c79c3b4544c10a9d84c1f321f16))
+
 ## [1.1.1](https://github.com/edelwud/GrowthHub/compare/gateway-v1.1.0...gateway-v1.1.1) (2023-07-25)
 
 
