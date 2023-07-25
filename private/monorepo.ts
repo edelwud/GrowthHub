@@ -88,7 +88,6 @@ export class MonorepoProject extends NxMonorepoProject {
         "      - uses: mansagroup/nrwl-nx-action@v3.2.1",
         "        with:",
         "          targets: test",
-        "          args: --code-coverage",
         "          nxCloud: 'true'",
         "        env:",
         "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
