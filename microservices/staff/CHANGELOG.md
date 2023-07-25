@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/edelwud/GrowthHub/compare/staff-v1.1.5...staff-v1.1.6) (2023-07-25)
+
+
+### Bug Fixes
+
+* subgraph issue ([110d376](https://github.com/edelwud/GrowthHub/commit/110d376de7ba251121be703970de4deda38924d6))
+
 ## [1.1.5](https://github.com/edelwud/GrowthHub/compare/staff-v1.1.4...staff-v1.1.5) (2023-07-25)
 
 
