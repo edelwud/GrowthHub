@@ -7,5 +7,6 @@ async function bootstrap() {
   await app.listen(3001);
   const url = await app.getUrl();
   Logger.log(`${url}/graphql`);
+  Logger.log('It\'s staff microservice');
 }
 void bootstrap();
