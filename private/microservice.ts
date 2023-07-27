@@ -68,6 +68,7 @@ export class MicroserviceProject extends TypeScriptAppProject {
         },
       ],
     });
+    this.testTask.prependExec("prisma generate");
     this.preCompileTask.prependExec("prisma generate");
 
     new TextFile(this, ".dockerignore", {

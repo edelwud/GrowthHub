@@ -87,6 +87,9 @@
       "description": "Run tests",
       "steps": [
         {
+          "exec": "prisma generate"
+        },
+        {
           "exec": "jest --passWithNoTests --updateSnapshot",
           "receiveArgs": true
         },
