@@ -34,7 +34,6 @@ jobs:
         with:
           targets: lint
           nxCloud: true
-      - {}
   test:
     runs-on: ubuntu-latest
     permissions:
@@ -62,7 +61,6 @@ jobs:
         with:
           targets: test
           nxCloud: true
-      - {}
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -90,11 +88,6 @@ jobs:
         with:
           targets: build
           nxCloud: true
-      - name: save build output
-        uses: actions/upload-artifact@v2
-        with:
-          name: packages
-          path: dist/packages
   release:
     needs:
       - lint
@@ -120,12 +113,6 @@ jobs:
           cache: pnpm
       - name: install dependencies
         run: pnpm install --frozen-lockfile
-      - name: download build output
-        uses: actions/download-artifact@v2
-        with:
-          name: packages
-          path: dist/packages
-        continue-on-error: true
       - name: login to github container registry
         uses: docker/login-action@v2
         with:

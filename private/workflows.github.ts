@@ -74,16 +74,6 @@ export class GithubWorkflows extends Component {
               NX_CLOUD_ACCESS_TOKEN: "${{ secrets.NX_CLOUD_ACCESS_TOKEN }}",
             },
           },
-          job === "build"
-            ? {
-                name: "save build output",
-                uses: "actions/upload-artifact@v2",
-                with: {
-                  name: "packages",
-                  path: "dist/packages",
-                },
-              }
-            : {},
         ],
       }),
     );
@@ -97,15 +87,6 @@ export class GithubWorkflows extends Component {
       },
       steps: [
         ...this.setupSteps,
-        {
-          name: "download build output",
-          uses: "actions/download-artifact@v2",
-          continueOnError: true,
-          with: {
-            name: "packages",
-            path: "dist/packages",
-          },
-        },
         {
           name: "login to github container registry",
           uses: "docker/login-action@v2",
