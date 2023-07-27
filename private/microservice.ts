@@ -15,6 +15,7 @@ export class MicroserviceProject extends TypeScriptAppProject {
       ...options,
       outdir: "./microservices/" + options.name,
       sampleCode: false,
+      prettier: true,
       tsconfig: {
         ...options.tsconfig,
         compilerOptions: {
