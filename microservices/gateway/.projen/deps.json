@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@faker-js/faker",
+      "type": "build"
+    },
+    {
       "name": "@semantic-release-plus/docker",
       "type": "build"
     },
@@ -33,6 +37,10 @@
     {
       "name": "@typescript-eslint/parser",
       "version": "^5",
+      "type": "build"
+    },
+    {
+      "name": "dotenv",
       "type": "build"
     },
     {
@@ -79,6 +87,15 @@
       "type": "build"
     },
     {
+      "name": "prisma-nestjs-graphql",
+      "type": "build"
+    },
+    {
+      "name": "prisma",
+      "version": "4.14.0",
+      "type": "build"
+    },
+    {
       "name": "projen",
       "type": "build"
     },
@@ -96,7 +113,7 @@
     },
     {
       "name": "@apollo/gateway",
-      "version": "2.2.3",
+      "version": "2.5.1",
       "type": "runtime"
     },
     {
@@ -105,7 +122,7 @@
     },
     {
       "name": "@apollo/subgraph",
-      "version": "2.2.3",
+      "version": "2.5.1",
       "type": "runtime"
     },
     {
@@ -129,7 +146,23 @@
       "type": "runtime"
     },
     {
+      "name": "@paljs/plugins",
+      "type": "runtime"
+    },
+    {
+      "name": "class-transformer",
+      "type": "runtime"
+    },
+    {
       "name": "graphql",
+      "type": "runtime"
+    },
+    {
+      "name": "graphql-type-json",
+      "type": "runtime"
+    },
+    {
+      "name": "prisma-graphql-type-decimal",
       "type": "runtime"
     }
   ],

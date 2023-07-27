@@ -43,6 +43,8 @@ junit.xml
 /lib
 /dist/
 !/.eslintrc.json
+src/@generated
+prisma/sqlite
 !/.dockerignore
 !/Dockerfile
 !/project.json

@@ -41,7 +41,8 @@
     "*.d.ts",
     "node_modules/",
     "*.generated.ts",
-    "coverage"
+    "coverage",
+    "src/@generated"
   ],
   "rules": {
     "prettier/prettier": [
@@ -55,7 +56,8 @@
       {
         "devDependencies": [
           "**/test/**",
-          "**/build-tools/**"
+          "**/build-tools/**",
+          "**/prisma/**"
         ],
         "optionalDependencies": false,
         "peerDependencies": true

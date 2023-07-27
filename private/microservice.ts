@@ -24,7 +24,17 @@ export class MicroserviceProject extends TypeScriptAppProject {
           emitDecoratorMetadata: true,
         },
       },
+      tsconfigDev: {
+        ...options.tsconfigDev,
+        compilerOptions: {
+          ...options.tsconfigDev?.compilerOptions,
+          rootDir: ".",
+          strictPropertyInitialization: false,
+          emitDecoratorMetadata: true,
+        },
+      },
     });
+    this.tsconfigDev?.addInclude("prisma/**/*.ts");
     this.addDeps(
       "@nestjs/common",
       "@nestjs/core",
@@ -32,10 +42,33 @@ export class MicroserviceProject extends TypeScriptAppProject {
       "@nestjs/apollo",
       "@apollo/server",
       "@nestjs/platform-express",
-      "@apollo/gateway@2.2.3",
-      "@apollo/subgraph@2.2.3",
+      "@apollo/gateway@2.5.1",
+      "@apollo/subgraph@2.5.1",
       "graphql",
+      "graphql-type-json",
+      "prisma-graphql-type-decimal",
+      "class-transformer",
+      "@paljs/plugins",
     );
+    this.addDevDeps(
+      "prisma@4.14.0",
+      "prisma-nestjs-graphql",
+      "@faker-js/faker",
+      "dotenv",
+    );
+    this.gitignore.addPatterns("src/@generated", "prisma/sqlite");
+    this.eslint?.addIgnorePattern("src/@generated");
+    this.eslint?.addRules({
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          devDependencies: ["**/test/**", "**/build-tools/**", "**/prisma/**"],
+          optionalDependencies: false,
+          peerDependencies: true,
+        },
+      ],
+    });
+    this.preCompileTask.prependExec("prisma generate");
 
     new TextFile(this, ".dockerignore", {
       lines: [

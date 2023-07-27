@@ -24,12 +24,14 @@
     "strictPropertyInitialization": false,
     "stripInternal": true,
     "target": "ES2019",
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "rootDir": "."
   },
   "include": [
     ".projenrc.js",
     "src/**/*.ts",
-    "test/**/*.ts"
+    "test/**/*.ts",
+    "prisma/**/*.ts"
   ],
   "exclude": [
     "node_modules"

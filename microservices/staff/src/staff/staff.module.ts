@@ -6,14 +6,13 @@ import {
 import { Module } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 import { StaffResolver } from "./staff.resolver";
-import { StaffService } from "./staff.service";
 
 @Module({
-  providers: [StaffResolver, StaffService],
+  providers: [StaffResolver],
   imports: [
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: { federation: 2 },
       plugins: [ApolloServerPluginInlineTrace()],
     }),
   ],

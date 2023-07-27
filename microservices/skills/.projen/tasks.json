@@ -75,7 +75,12 @@
     },
     "pre-compile": {
       "name": "pre-compile",
-      "description": "Prepare the project for compilation"
+      "description": "Prepare the project for compilation",
+      "steps": [
+        {
+          "exec": "prisma generate"
+        }
+      ]
     },
     "test": {
       "name": "test",
@@ -110,19 +115,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@types/ws,@apollo/gateway,@apollo/subgraph'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@types/ws,prisma,@apollo/gateway,@apollo/subgraph'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@types/ws,@apollo/gateway,@apollo/subgraph'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@types/ws,prisma,@apollo/gateway,@apollo/subgraph'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@types/ws,@apollo/gateway,@apollo/subgraph'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@types/ws,prisma,@apollo/gateway,@apollo/subgraph'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@types/ws,@apollo/gateway,@apollo/subgraph'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@types/ws,prisma,@apollo/gateway,@apollo/subgraph'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@types/ws,@apollo/gateway,@apollo/subgraph'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@types/ws,prisma,@apollo/gateway,@apollo/subgraph'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
