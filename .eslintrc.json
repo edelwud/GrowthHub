@@ -37,7 +37,8 @@
     }
   },
   "ignorePatterns": [
-    "packages/**/*.*",
+    "*.js",
+    "microservices/**/*.*",
     "!.projenrc.ts",
     "!projenrc/**/*.ts"
   ],
@@ -55,7 +56,8 @@
           "**/test/**",
           "**/build-tools/**",
           ".projenrc.ts",
-          "projenrc/**/*.ts"
+          "projenrc/**/*.ts",
+          "private/*.ts"
         ],
         "optionalDependencies": false,
         "peerDependencies": true

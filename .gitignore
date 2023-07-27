@@ -45,6 +45,7 @@ jspm_packages/
 !/nx.json
 !/.nxignore
 !/.syncpackrc.json
+!lib
+!/.github/workflows/pull-request-lint.yml
 !/release.config.js
-!/.github/workflows/release.yml
 !/pnpm-workspace.yaml

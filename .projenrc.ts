@@ -9,6 +9,10 @@ const monorepo = new MonorepoProject({
   projenrcTs: true,
   packageManager: NodePackageManager.PNPM,
   repository: "https://github.com/edelwud/GrowthHub",
+  eslintOptions: {
+    dirs: ["private", "microservices", "libs"],
+    ignorePatterns: ["*.js", "microservices/**/*.*"],
+  },
 });
 
 new MicroserviceProject({

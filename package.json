@@ -50,11 +50,6 @@
   "peerDependencies": {
     "nx": "^16"
   },
-  "dependencies": {
-    "aws-cdk-lib": "^2.88.0",
-    "cdk-nag": "^2.27.78",
-    "constructs": "^10.2.69"
-  },
   "pnpm": {
     "overrides": {
       "@types/babel__traverse": "7.18.2",

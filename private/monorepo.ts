@@ -1,30 +1,60 @@
-import { relative } from "path";
+import { readFileSync } from "fs";
+import { relative, join } from "path";
 import {
   NodePackageUtils,
   NxMonorepoProject,
   NxMonorepoProjectOptions,
   NxProject,
 } from "@aws-prototyping-sdk/nx-monorepo";
-import isNodeProject = NodePackageUtils.isNodeProject;
-import { NodeProject } from "projen/lib/javascript";
 import { TextFile } from "projen";
+import isNodeProject = NodePackageUtils.isNodeProject;
+import { MicroserviceProject } from "./microservice";
+import { GithubWorkflows } from "./workflows.github";
 
 export interface MonorepoProjectOptions extends NxMonorepoProjectOptions {}
 
 export class MonorepoProject extends NxMonorepoProject {
+  runManyTasks = ["release", "docker", "watch-and-run"];
+  semVerDeps = [
+    "semantic-release-plus",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@semantic-release-plus/docker",
+    "@semantic-release/release-notes-generator",
+  ];
+
   constructor(options: MonorepoProjectOptions) {
     super(options);
 
-    this.nxConfigurator.addNxRunManyTask("release", {
-      target: "release",
+    this.gitignore.include("lib");
+    this.deps.removeDependency("aws-cdk-lib");
+    this.deps.removeDependency("cdk-nag");
+    this.deps.removeDependency("constructs");
+    this.eslint?.addRules({
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          devDependencies: [
+            "**/test/**",
+            "**/build-tools/**",
+            ".projenrc.ts",
+            "projenrc/**/*.ts",
+            "private/*.ts",
+          ],
+          optionalDependencies: false,
+          peerDependencies: true,
+        },
+      ],
     });
 
-    this.nxConfigurator.addNxRunManyTask("docker", {
-      target: "docker",
-    });
+    this.runManyTasks.forEach((task) =>
+      this.nxConfigurator.addNxRunManyTask(task, {
+        target: task,
+      }),
+    );
 
-    this.nxConfigurator.addNxRunManyTask("watch-and-run", {
-      target: "watch-and-run",
+    new GithubWorkflows(this, {
+      prereleaseJobs: ["lint", "test", "build"],
     });
 
     this.nx.useNxCloud(
@@ -32,229 +62,56 @@ export class MonorepoProject extends NxMonorepoProject {
     );
 
     new TextFile(this, "release.config.js", {
-      lines: [
-        "module.exports = {",
-        "  preset: 'conventionalcommits',",
-        "  presetConfig: {",
-        "    types: [",
-        "      { type: 'feat', section: 'Features' },",
-        "      { type: 'fix', section: 'Bug Fixes' },",
-        "      { type: 'chore', section: 'Chores' },",
-        "      { type: 'docs', hidden: true },",
-        "      { type: 'style', hidden: true },",
-        "      { type: 'refactor', section: 'Refactoring' },",
-        "      { type: 'perf', hidden: true },",
-        "      { type: 'test', hidden: true },",
-        "    ],",
-        "  },",
-        "  releaseRules: [{ type: 'refactor', release: 'patch' }],",
-        "};",
-      ],
-    });
-
-    new TextFile(this, ".github/workflows/release.yml", {
-      lines: [
-        `name: ${this.name} release`,
-        "on:",
-        " push:",
-        "   branches:",
-        "     - main",
-        "     - '*.x'",
-        "jobs:",
-        "  lint:",
-        "    runs-on: ubuntu-latest",
-        "    steps:",
-        "      - uses: actions/checkout@v3.5.0",
-        "        with:",
-        "          fetch-depth: 0",
-        "      - uses: pnpm/action-setup@v2",
-        "        with:",
-        "          version: 8",
-        "      - uses: actions/setup-node@v3",
-        "        with:",
-        "          cache: pnpm",
-        "      - run: pnpm i",
-        "      - uses: mansagroup/nrwl-nx-action@v3.2.1",
-        "        with:",
-        "          targets: lint",
-        "          nxCloud: 'true'",
-        "        env:",
-        "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-        "  test:",
-        "    runs-on: ubuntu-latest",
-        "    steps:",
-        "      - uses: actions/checkout@v3.5.0",
-        "        with:",
-        "          fetch-depth: 0",
-        "      - uses: pnpm/action-setup@v2",
-        "        with:",
-        "          version: 8",
-        "      - uses: actions/setup-node@v3",
-        "        with:",
-        "          cache: pnpm",
-        "      - run: pnpm i",
-        "      - uses: mansagroup/nrwl-nx-action@v3.2.1",
-        "        with:",
-        "          targets: test",
-        "          nxCloud: 'true'",
-        "        env:",
-        "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-        "  build:",
-        "    runs-on: ubuntu-latest",
-        "    steps:",
-        "      - uses: actions/checkout@v3.5.0",
-        "        with:",
-        "          fetch-depth: 0",
-        "      - uses: pnpm/action-setup@v2",
-        "        with:",
-        "          version: 8",
-        "      - uses: actions/setup-node@v3",
-        "        with:",
-        "          cache: pnpm",
-        "      - run: pnpm i",
-        "      - name: Build affected",
-        "        uses: mansagroup/nrwl-nx-action@v3.2.1",
-        "        with:",
-        "          targets: build",
-        "          args: --configuration=production",
-        "          nxCloud: 'true'",
-        "        env:",
-        "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-        "      - name: Save build output",
-        "        uses: actions/upload-artifact@v2",
-        "        with:",
-        "          name: packages",
-        "          path: dist/packages",
-        "",
-        "  release:",
-        "    needs:",
-        "      - lint",
-        "      - test",
-        "      - build",
-        "    runs-on: ubuntu-latest",
-        "    steps:",
-        "      - uses: actions/checkout@v3.5.0",
-        "        with:",
-        "          fetch-depth: 0",
-        "      - uses: pnpm/action-setup@v2",
-        "        with:",
-        "          version: 8",
-        "      - uses: actions/setup-node@v3",
-        "        with:",
-        "          cache: pnpm",
-        "      - run: pnpm i",
-        "      - name: Get build output",
-        "        continue-on-error: true",
-        "        uses: actions/download-artifact@v2",
-        "        with:",
-        "          name: packages",
-        "          path: dist/packages",
-        "      - name: Login to GitHub Container Registry",
-        "        uses: docker/login-action@v2",
-        "        with:",
-        "          registry: ghcr.io",
-        "          username: ${{ github.actor }}",
-        "          password: ${{ secrets.GITHUB_TOKEN }}",
-        "      - name: Docker build affected",
-        "        uses: mansagroup/nrwl-nx-action@v3.2.1",
-        "        with:",
-        "          targets: docker",
-        "          nxCloud: 'true'",
-        "          parallel: 3",
-        "        env:",
-        "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-        "          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_PAT }}",
-        "      - name: Release affected",
-        "        uses: mansagroup/nrwl-nx-action@v3.2.1",
-        "        with:",
-        "          targets: release",
-        "          nxCloud: 'true'",
-        "          parallel: 1",
-        "        env:",
-        "          NX_CLOUD_ACCESS_TOKEN: ${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-        "          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_PAT }}",
-      ],
+      lines: readFileSync(
+        join(__dirname, "templates", "release-base.config.js"),
+      )
+        .toString()
+        .split("\n"),
     });
   }
 
   preSynthesize() {
     super.preSynthesize();
     this.subprojects.forEach((subproject) => {
-      if (isNodeProject(subproject) && subproject instanceof NodeProject) {
-        subproject.addDevDeps("semantic-release");
-        subproject.addDevDeps("semantic-release-plus");
-        subproject.addDevDeps("@semantic-release/changelog");
-        subproject.addDevDeps("@semantic-release/git");
-        subproject.addDevDeps("@semantic-release-plus/docker");
-        subproject.addDevDeps("@semantic-release/release-notes-generator");
+      if (
+        isNodeProject(subproject) &&
+        subproject instanceof MicroserviceProject
+      ) {
+        this.semVerDeps.forEach((dep) => subproject.addDevDeps(dep));
         if (subproject.tryFindFile(".helm")) {
           subproject.addDevDeps("semantic-release-helm");
         }
 
-        NxProject.ensure(subproject).setTarget("release", {
-          executor: "nx:run-commands",
-          options: {
+        const nxProject = NxProject.ensure(subproject);
+        const projectTargets = [
+          {
+            name: "release",
             command: "pnpm exec semantic-release-plus",
-            cwd: relative(this.outdir, subproject.outdir),
           },
-        });
-
-        NxProject.ensure(subproject).setTarget("docker", {
-          executor: "nx:run-commands",
-          options: {
+          {
+            name: "docker",
             command: `docker build -t edelwud/${subproject.name} .`,
-            cwd: relative(this.outdir, subproject.outdir),
           },
-        });
+          {
+            name: "watch-and-run",
+            command: "nodemon src/main.ts",
+          },
+        ];
 
-        NxProject.ensure(subproject).setTarget("watch-and-run", {
-          executor: "nx:run-commands",
-          options: {
-            command: `nodemon src/main.ts`,
-            cwd: relative(this.outdir, subproject.outdir),
-          },
-        });
+        projectTargets.forEach(({ name, command }) =>
+          nxProject.setTarget(name, {
+            executor: "nx:run-commands",
+            options: {
+              command,
+              cwd: relative(this.outdir, subproject.outdir),
+            },
+          }),
+        );
 
         new TextFile(subproject, "release.config.js", {
-          lines: [
-            `const appName = '${subproject.name}';`,
-            `const appPath = '${relative(this.outdir, subproject.outdir)}';`,
-            "const artifactName = appName;",
-            "module.exports = {",
-            "  name: appName,",
-            "  pkgRoot: 'lib/',",
-            "  tagFormat: artifactName + '-v${version}',",
-            "  commitPaths: ['*'],",
-            "  assets: ['README.md', 'CHANGELOG.md'],",
-            "  branches: ['main'],",
-            "  plugins: [",
-            "    '@semantic-release/commit-analyzer',",
-            "    '@semantic-release/release-notes-generator',",
-            "    [",
-            "      '@semantic-release/changelog',",
-            "      {",
-            "        changelogFile: `CHANGELOG.md`,",
-            "      },",
-            "    ],",
-            "    [",
-            "      '@semantic-release-plus/docker',",
-            "      {",
-            "        name: `ghcr.io/edelwud/${appName}`,",
-            "        skipLogin: 'true'",
-            "      },",
-            "    ],",
-            "    [",
-            "      '@semantic-release/git',",
-            "      {",
-            "        assets: ['CHANGELOG.md'],",
-            "        message:",
-            "          `chore(release): ${artifactName}` +",
-            "          '-v${nextRelease.version} [skip ci]\\n\\n${nextRelease.notes}',",
-            "      },",
-            "    ],",
-            "  ],",
-            "};",
-          ],
+          lines: readFileSync(join(__dirname, "templates", "release.config.js"))
+            .toString()
+            .split("\n"),
         });
       }
     });
